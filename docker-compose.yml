@@ -4,7 +4,7 @@ services:
     image: registry.gitlab.com/e4gl/discordvoicestatus:latest
     restart: unless-stopped
     security_opt:
-      - no-new-privilege
+      - no-new-privileges
     ports:
       - "8080:8080"
     environment:
