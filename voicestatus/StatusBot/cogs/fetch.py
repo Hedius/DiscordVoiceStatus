@@ -61,7 +61,7 @@ class FetchData(commands.Cog, name='User Linker'):
                     member_data['self_deaf'] = member.voice.self_deaf
                     member_data['self_mute'] = member.voice.self_mute
                     member_data['suppress'] = member.voice.suppress
-                if not self._bot.load_all_members or member.voice:
+                if self._bot.load_all_members or member.voice:
                     guild_data['members'].append(member_data)
             new_data[guild.id] = guild_data
 
