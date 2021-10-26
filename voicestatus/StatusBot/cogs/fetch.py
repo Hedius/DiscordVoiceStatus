@@ -29,7 +29,7 @@ class FetchData(commands.Cog, name='User Linker'):
         await self._bot.wait_until_ready()
         for guild in self._bot.guilds:
             guild_data = {
-                'id': guild.id,
+                'id': str(guild.id),
                 'name': guild.name,
                 'instant_invite': 'https://discord.e4gl.com',
                 'channels': [],
@@ -37,7 +37,7 @@ class FetchData(commands.Cog, name='User Linker'):
             }
             for channel in guild.voice_channels:
                 channel_data = {
-                    'id': channel.id,
+                    'id': str(channel.id),
                     'name': channel.name,
                     'position': channel.position
                 }
@@ -45,7 +45,7 @@ class FetchData(commands.Cog, name='User Linker'):
 
             for member in guild.members:
                 member_data = {
-                    'id': member.id,
+                    'id': str(member.id),
                     'username': member.name,
                     'discriminator': member.discriminator,
                     'avatar': None,
