@@ -1,7 +1,7 @@
 version: '2.4'
 services:
   DiscordVoiceStatus:
-    image: registry.gitlab.com/e4gl/discordvoicestatus:latest
+    image: hedius/discordvoicestatus:latest
     restart: unless-stopped
     security_opt:
       - no-new-privileges
