@@ -9,7 +9,7 @@ flake8:
     - docker
   script:
     - python -m pip install flake8
-    - flake8 src
+    - flake8 voicestatus
 
 Pylama:
  stage: code quality
@@ -17,7 +17,7 @@ Pylama:
    - docker
  script:
    - python -m pip install pylama
-   - pylama src
+   - pylama voicestatus
 
 docker-build-main:
   # Official docker image.
