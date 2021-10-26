@@ -55,7 +55,7 @@ class FetchData(commands.Cog, name='User Linker'):
                 if member.nick:
                     member_data['nick'] = member.nick
                 if member.voice:
-                    member_data['channel_id'] = member.voice.channel.id
+                    member_data['channel_id'] = str(member.voice.channel.id)
                     member_data['deaf'] = member.voice.deaf
                     member_data['mute'] = member.voice.mute
                     member_data['self_deaf'] = member.voice.self_deaf
