@@ -10,9 +10,9 @@ The member ID is needed to have 100% correct matches 24/7.
 
 ## Features
 * The bot supports multiple discord servers.
-* Just invite the bot to
+* Just invite the bot to your server and host it yourself or:
   * You can also ask me for help. I run a public instance and can serve data for you.
-  *   Discord: Hedius#0001
+  * Discord: Hedius#0001
 * The JSON is served by a flask app on port 8080.
 
 ## Retrieving Data
@@ -32,6 +32,8 @@ Examples:
 If you use AdKats for your BF4 servers. AdKats has a hardcoded widget url.
 My custom fork implements an option for modifying the discord API URL:
 [E4GLAdKats](https://github.com/Hedius/E4GLAdKats)
+
+AdKats Setting: **Discord API URL** -> Set it to `https://HOST:PORT/`
 
 ## Installation
 ### docker-compose
