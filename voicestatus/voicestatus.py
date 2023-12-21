@@ -3,16 +3,36 @@ __author__ = 'Hedius'
 __license__ = 'GPLv3'
 
 import asyncio
+import logging
+import os
 import sys
 import threading
-import os
-import logging
-
 from argparse import ArgumentParser
+
+from waitress import serve
 
 from StatusBot.StatusBot import StatusBot
 from WidgetAPI.WidgetAPI import app
-from waitress import serve
+
+
+def start_flask_app(host, port) -> threading.Thread:
+    """
+    Launch the flask app for serving the shared storage data
+    in a thread.
+    :return: thread
+    """
+
+    def server_flask():
+        """
+        Start the flask app. / Main logic of the thread.
+        """
+        logging.info('Serving flask app at '
+                     f'{host}:{port}')
+        serve(app, host=host, port=port, ident='VoiceStatus')
+
+    flask_thread = threading.Thread(target=server_flask)
+    flask_thread.start()
+    return flask_thread
 
 
 def start_bot_thread(token, load_all_members):
@@ -60,8 +80,8 @@ def read_config():
     port = int(os.getenv('VOICESTATUS_PORT', args.port))
     load_all = os.getenv(
         'VOICESTATUS_LOAD_ALL', str(args.load_all)).lower() in (
-        'true', '1', 't'
-    )
+                   'true', '1', 't'
+               )
     return token, host, port, load_all
 
 
@@ -70,12 +90,11 @@ def main():
 
     logging.getLogger('waitress').setLevel(logging.DEBUG)
 
-    # Start the discord bot in a thread
-    start_bot_thread(token, load_all)
-    # we will not join the bot thread -> kill it if flask crashes
+    # run flask in a thread
+    flask_thread = start_flask_app(host, port)
 
-    # run flask in the main thread
-    serve(app, host=host, port=port, ident='VoiceStatus')
+    bot = StatusBot(load_all, flask_thread)
+    bot.run(token)
 
 
 if __name__ == '__main__':

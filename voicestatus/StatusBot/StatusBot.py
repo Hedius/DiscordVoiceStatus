@@ -10,10 +10,11 @@ from nextcord.ext import commands
 class StatusBot(commands.Bot):
     """Bot for gathering active voice members."""
 
-    def __init__(self, load_all_members):
+    def __init__(self, load_all_members, flask_thread):
         """
         Init the bot
         """
+        self.flask_thread = flask_thread
         intents = nextcord.Intents.all()
         self.load_all_members = load_all_members
 

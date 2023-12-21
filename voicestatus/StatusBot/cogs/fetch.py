@@ -1,6 +1,8 @@
 __author__ = 'Hedius'
 __license__ = 'GPLv3'
 
+import logging
+
 from nextcord.ext import commands, tasks
 
 from ..SharedStorage import SharedStorage
@@ -25,6 +27,9 @@ class FetchData(commands.Cog, name='User Linker'):
         Sync tag etc.
         :return:
         """
+        if not self._bot.flask_thread.is_alive():
+            logging.critical('Flask thread died. Shutting down.')
+            exit(1)
         new_data = {}
         await self._bot.wait_until_ready()
         for guild in self._bot.guilds:
