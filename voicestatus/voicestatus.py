@@ -79,9 +79,9 @@ def read_config():
     host = os.getenv('VOICESTATUS_HOST', args.host)
     port = int(os.getenv('VOICESTATUS_PORT', args.port))
     load_all = os.getenv(
-        'VOICESTATUS_LOAD_ALL', str(args.load_all)).lower() in (
-                   'true', '1', 't'
-               )
+        'VOICESTATUS_LOAD_ALL',
+        str(args.load_all)
+    ).lower() in ('true', '1', 't')
     return token, host, port, load_all
 
 
